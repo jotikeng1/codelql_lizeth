@@ -1,0 +1,24 @@
+name: Analisis CodeQL
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  analyze:
+    name: Analizar codigo Python
+    runs-on: ubuntu-latest
+    permissions:
+        security-events: write
+        packages: read
+        actions: read
+        contents: read
+    steps:
+        - name: Descargar el repositorio
+          uses: actions/checkout@v4
+        - name: Inicializar CodeQL
+          uses: github/codeql-action/init@v4
+          with:
+            languages: python
+        - name: Ejecutar analisis
+          uses: github/codeql-action/analyze@v4
